@@ -1,5 +1,6 @@
 ﻿import random
 class GA_string():
+    default_dict_set={"Latin":list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"),"Default":list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ~!@#$%^&*()_+`1234567890-={}|:\"<>?[]\\;',./")}
     def Fitness_Score(self,origin_Lst,target):
         l=len(target)
         Fitness_Score=[]
@@ -25,12 +26,7 @@ class GA_string():
         if type(dic_type)==list:
             self.dic=dic_type[:]
         elif type(dic_type)==str:
-            if(dic_type=="Latin"):
-                self.dic=[]
-                for i in range(26):
-                    self.dic.append(chr(ord('a')+i))
-                for i in range(26):
-                    self.dic.append(chr(ord('A')+i))
+            self.dic=self.default_dict_set[dic_type]
     def GetDict(self):
         return(self.dic)
     def single_gene_mutation(self,individual_Lst,mutation_rate,filter_non_mutant=False):
@@ -97,7 +93,7 @@ class GA_string():
         self.str_target=""
         self.Parents_Lst=[]        
         self.dic=[]
-        self.Set_dic("Latin")
+        self.Set_dic("Default")
 
     def Sort_Individual(self,individual_Lst,reversed=False):
         Fitness_Score_Lst=self.Fitness_Score(individual_Lst,self.str_target)
@@ -108,3 +104,7 @@ class GA_string():
         str_score_structure_Lst=sorted(str_score_structure_Lst,key=lambda str_score_structure_Lst:str_score_structure_Lst[1],reverse=reversed)
         sorted_individual_Lst=list(map(lambda x:x[0],str_score_structure_Lst))
         return sorted_individual_Lst
+
+    def getDic(self):
+        return(self.dic)
+
