@@ -1,6 +1,6 @@
-﻿import random
-class GA_string():
-    default_dict_set={"Latin":list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"),"Default":list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ~!@#$%^&*()_+`1234567890-={}|:\"<>?[]\\;',./")}
+import random
+class GA_String():
+    default_dict_set={"Latin":list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"),"Default":list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ~!@#$%^&*()_+`1234567890-={}|:\"<>?[]\\;',./"),"Number":list("0123456789"),"Symbol":" ~!@#$%^&*()_+`-={}|:\"<>?[]\\;',./"}
     def Fitness_Score(self,origin_Lst,target):
         l=len(target)
         Fitness_Score=[]
@@ -15,20 +15,26 @@ class GA_string():
                 Fitness_Score.append(float(Matched_ch_num)/float(l))
         return(Fitness_Score)
 
-    def Set_origin(self,origin):
-        if (type(origin)==str):
-            self.str_origin=origin
-
     def Set_target(self,target):
         if (type(target)==str):
             self.str_target=target
-    def Set_dic(self,dic_type):
+
+    def Set_Dict(self,dic_type):
         if type(dic_type)==list:
             self.dic=dic_type[:]
         elif type(dic_type)==str:
             self.dic=self.default_dict_set[dic_type]
-    def GetDict(self):
+
+    def Get_Dict(self):
         return(self.dic)
+
+    def Dict_Append(self,dic):
+        if(type(dic)==str):
+            if(dic in self.default_dict_set.keys()):
+                self.dic+=self.default_dict_set[dic]
+        elif(type(Dic)==list):
+            self.dic+=dic
+
     def single_gene_mutation(self,individual_Lst,mutation_rate,filter_non_mutant=False):
         mutant_Lst=[]
         if(type(mutation_rate)==float):
@@ -82,7 +88,7 @@ class GA_string():
                 Selected_Generation_Lst.append(individual_source[i])
         return(Selected_Generation_Lst)
 
-    def spam(self,str_len):
+    def Generate_individual(self,str_len):
         l=[]
         for i in range(str_len):
             l.append(self.dic[random.randint(0,len(self.dic)-1)])
@@ -91,9 +97,9 @@ class GA_string():
     def __init__(self):
         self.str_origin=""
         self.str_target=""
-        self.Parents_Lst=[]        
+        self.Parents_Lst=[]
         self.dic=[]
-        self.Set_dic("Default")
+        self.Set_Dict("Default")
 
     def Sort_Individual(self,individual_Lst,reversed=False):
         Fitness_Score_Lst=self.Fitness_Score(individual_Lst,self.str_target)
@@ -103,8 +109,4 @@ class GA_string():
             str_score_structure_Lst.append([individual_Lst[i],Fitness_Score_Lst[i]])
         str_score_structure_Lst=sorted(str_score_structure_Lst,key=lambda str_score_structure_Lst:str_score_structure_Lst[1],reverse=reversed)
         sorted_individual_Lst=list(map(lambda x:x[0],str_score_structure_Lst))
-        return sorted_individual_Lst
-
-    def getDic(self):
-        return(self.dic)
-
+        return(sorted_individual_Lst)
