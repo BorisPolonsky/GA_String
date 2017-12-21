@@ -5,13 +5,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>a7ba06b3-cff6-497f-84a1-c6ce78e2469e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>GA_String.py</StartupFile>
+    <StartupFile>GaString.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>GA_String</Name>
-    <RootNamespace>GA_String</RootNamespace>
+    <Name>GaString</Name>
+    <RootNamespace>GaString</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GA_String.py" />
+    <Compile Include="GaString.py" />
     <Compile Include="main.py">
       <SubType>Code</SubType>
     </Compile>
